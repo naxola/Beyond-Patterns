@@ -102,6 +102,12 @@ def audit(p, eps=None):
             errs.append("prueba sin giro inventado")
         if min_class1(P, p.k) is not None:
             errs.append("existe solución de clase 1 con <= K trazos")
+        else:
+            # franja entre "giro exacto sobre un punto" y "giro a < delta de un punto":
+            # ninguna solución por rectas de >=2 puntos puede clasificarse como clase 1
+            from .baselines import all_solutions
+            if any(solution_class(P, s) == 1 for s in all_solutions(P, p.k)):
+                errs.append("existe solución casi-clase-1 (giro a < delta de un punto)")
     return errs
 
 

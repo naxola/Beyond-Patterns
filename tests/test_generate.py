@@ -21,3 +21,10 @@ def test_audit_catches_bad_problem():
     p = generate(1, "train", lambda r, k: 0)
     p.kind = "test"
     assert audit(p)       # un problema de clase 1 no sirve como prueba
+
+
+def test_test_problems_have_no_near_class1_solution():
+    from beyond.baselines import all_solutions
+    for s in range(12):
+        p = generate(s, "test", lambda r, k: k - 1)
+        assert all(solution_class(p.points, x) == 2 for x in all_solutions(p.points, p.k))

@@ -61,6 +61,8 @@ def exact_class2(points, k, eps=EPS, collect=None):
         def dfs(seq, cov):
             d = len(seq)
             if d == kk:
+                if cov != full:      # las rectas no cubren todos los puntos: ni construir
+                    return None
                 r = _build(P, seq, kk, eps)
                 if r is not None and collect is not None:
                     collect.append(r)
