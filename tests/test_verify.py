@@ -42,3 +42,9 @@ def test_zigzag_class1():
     pts = [(0.1, 0.1), (0.5, 0.1), (0.9, 0.1), (0.5, 0.5), (0.1, 0.9)]
     k, _ = min_class1(pts, 4)
     assert k <= 3
+
+
+def test_duplicate_vertices_do_not_hide_turns():
+    dup = [s(0, 0), s(3, 0), s(3, 0), s(0, 3), s(0, 3), s(0, 0), s(2, 2)]
+    assert solution_class(GRID, dup) == 2
+    assert len(invented_turns(GRID, dup)) == 2

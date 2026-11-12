@@ -28,12 +28,19 @@ def uncovered(points, path, eps=EPS):
 def turns(path, min_deg=MIN_TURN_DEG):
     """Vértices interiores donde la trayectoria gira de verdad."""
     out = []
-    for i in range(1, len(path) - 1):
-        u = np.asarray(path[i], float) - np.asarray(path[i - 1], float)
-        v = np.asarray(path[i + 1], float) - np.asarray(path[i], float)
-        nu, nv = np.linalg.norm(u), np.linalg.norm(v)
-        if nu == 0 or nv == 0:
+    # Para cada vértice se usa el anterior y el siguiente vértice *distintos*, de modo que
+    # repetir un vértice no pueda ocultar un giro.
+    P = [np.asarray(p, float) for p in path]
+    for i in range(1, len(P) - 1):
+        if np.array_equal(P[i], P[i - 1]):
+            continue  # ya contado en su primera aparición
+        j = i + 1
+        while j < len(P) and np.array_equal(P[j], P[i]):
+            j += 1
+        if j == len(P):
             continue
+        u, v = P[i] - P[i - 1], P[j] - P[i]
+        nu, nv = np.linalg.norm(u), np.linalg.norm(v)
         ang = np.degrees(np.arccos(np.clip(u @ v / (nu * nv), -1, 1)))
         if ang > min_deg:
             out.append(i)
