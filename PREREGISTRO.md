@@ -55,3 +55,14 @@ Consecuencias, fijadas antes de ver ningún resultado de modelo:
 - **Criterio de éxito, en dos niveles:** (a) *débil*: el modelo supera al azar uniforme y a la copia del vecino con p < 0,01; (b) *fuerte*: además supera al azar sobre rectas con el mismo número de intentos M. Se informa cada nivel por separado. Solo el fuerte permite afirmar que el modelo aporta algo más que explorar rectas por pares de puntos.
 - Con M=100 la barra fuerte es ≈ 45 % en test_pure.
 - Si el modelo no usa muestreo (un solo intento), la comparación justa es con azar sobre rectas con M=1.
+
+## Fase 4: entrenamiento por imitación (registro de intentos)
+Todas las decisiones de modelo se toman sobre `val` (mismo generador que el entrenamiento, semilla distinta). `control` solo se evalúa una vez al final, cuando `val` ≥ 90 %. Los conjuntos de prueba no se tocan.
+
+Decisiones de diseño: salida de coordenadas libres discretizadas en 256 niveles por eje; sin símbolo de fin (K da el número de vértices); aumento con las 8 simetrías del cuadrado (conservan clase, validez y alineaciones); pérdida con objetivo gaussiano de 1 bin.
+
+| Intento | Datos | Modelo | Épocas | Mejor val (un intento voraz) |
+|---|---|---|---|---|
+| 1 | 20.000 | d=128, 3+3 capas, 1,5 M parám. | 40 | **19,2 %** (K=2: 50 %, K=3: 9 %, K=4: 2 %) |
+
+Diagnóstico del intento 1 (300 problemas de val): el 81 % de los vértices generados está a < 0,01 de un punto dado, y ajustarlos al punto más cercano solo sube la validez de 10 % a 13 %. El fallo no es de precisión de coordenadas sino de elegir los vértices correctos (razonamiento combinatorio sobre alineaciones). No se introduce ninguna característica de alineación hecha a mano: daría al modelo la estructura de la solución y debilitaría la hipótesis.
