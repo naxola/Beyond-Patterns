@@ -34,3 +34,24 @@ Valores fijados **antes** de generar datos o entrenar. Cualquier cambio posterio
 - **Corrección del verificador:** los vértices repetidos ocultaban giros (una solución de clase 2 se clasificaba como clase 1). Corregido y cubierto con una prueba.
 - **Reinterpretación del control de distribución:** entrenamiento y prueba son distinguibles al 100 % por definición (el solucionador de clase 1 los separa: 100 % frente a 0 % resolubles). Lo que el control debe medir es si coinciden las variables accesorias: solo con N y K el clasificador acierta 0,53; con N, K, centro y dispersión 0,58; solo con distancias 0,58. La diferencia restante es estructural (alineaciones sin esquina), es decir, la propia manipulación.
 - k₁ medido en la prueba pura: K=2 → 3; K=3 → 4,7 de media; K=4 → 6,0 de media. La clase 1 necesita entre 1 y 2 trazos más de los permitidos.
+
+## Fase 3: referencias (100 problemas por conjunto, datos regenerados con la auditoría casi-clase-1)
+Corrección previa: el 4 % de los problemas de prueba (6/150) admitía una solución clasificada como clase 1 (giro a < δ de un punto, sin estar sobre él). Ahora `audit()` rechaza todo problema de prueba cuya enumeración completa de soluciones por rectas de ≥ 2 puntos contenga alguna de clase 1. Reescaneo: 0/80 en test_pure y 0/80 en test_graded.
+
+| Referencia | control | test_pure | test_graded |
+|---|---|---|---|
+| Solucionador clase 1 (exacto) | 100 % | 0 % | 0 % |
+| Solucionador exacto clase 2 (techo) | – | 100 % | 100 % |
+| Copia del vecino de train | 0 % | 0 % | 0 % |
+| Azar uniforme, M=100 / 1000 | 0 % / 0 % | 0 % / 0 % | 0 % / 0 % |
+| Azar sobre rectas de puntos, M=100 | 61 % válidas | 45 % | 49 % |
+| Azar sobre rectas de puntos, M=10000 | 99 % válidas | 89 % | 90 % |
+
+Todos los aciertos de las referencias en los conjuntos de prueba son de clase 2 (0 % de clase 1).
+
+Consecuencias, fijadas antes de ver ningún resultado de modelo:
+- El techo (100 %) demuestra que todos los problemas de prueba son resolubles sin entrenar.
+- "Azar sobre rectas de puntos" no es azar ciego: conoce la estructura de la solución (rectas por pares de puntos). Es una referencia informada y muy exigente.
+- **Criterio de éxito, en dos niveles:** (a) *débil*: el modelo supera al azar uniforme y a la copia del vecino con p < 0,01; (b) *fuerte*: además supera al azar sobre rectas con el mismo número de intentos M. Se informa cada nivel por separado. Solo el fuerte permite afirmar que el modelo aporta algo más que explorar rectas por pares de puntos.
+- Con M=100 la barra fuerte es ≈ 45 % en test_pure.
+- Si el modelo no usa muestreo (un solo intento), la comparación justa es con azar sobre rectas con M=1.
