@@ -48,7 +48,7 @@ def _end_options(P, line, vtx, eps):
     return opts
 
 
-def exact_class2(points, k, eps=EPS):
+def exact_class2(points, k, eps=EPS, collect=None):
     """Búsqueda exhaustiva sobre rectas por >=2 puntos. Devuelve el camino de menos trazos
     <= k que cubre todo (puede girar fuera de los puntos), o None.
     Exacta para problemas donde cada trazo de alguna solución contiene >=2 puntos."""
@@ -61,7 +61,11 @@ def exact_class2(points, k, eps=EPS):
         def dfs(seq, cov):
             d = len(seq)
             if d == kk:
-                return _build(P, seq, kk, eps)
+                r = _build(P, seq, kk, eps)
+                if r is not None and collect is not None:
+                    collect.append(r)
+                    return None   # seguir enumerando todas
+                return r
             if len(cov) + (kk - d) * maxc < n:
                 return None
             for l in lines:
@@ -77,6 +81,13 @@ def exact_class2(points, k, eps=EPS):
         if r is not None:
             return r
     return None
+
+
+def all_solutions(points, k, eps=EPS):
+    """Todas las soluciones válidas (<= k trazos) formadas por rectas que pasan por >=2 puntos."""
+    out = []
+    exact_class2(points, k, eps, collect=out)
+    return out
 
 
 def _build(P, seq, k, eps):
