@@ -19,7 +19,8 @@ def _graded_ni(rng, k):
 
 
 FNS = {"train": ("train", _train_ni, (2, 3, 4)),
-       "control": ("train", _train_ni, (2, 3, 4)),
+       "val": ("train", _train_ni, (2, 3, 4)),      # solo para afinar hiperparámetros
+       "control": ("train", _train_ni, (2, 3, 4)),  # competencia: se mira una vez al final
        "test_pure": ("test", _pure_ni, (2, 3, 4)),
        "test_graded": ("test", _graded_ni, (2, 3, 4))}
 
