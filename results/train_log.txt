@@ -1,0 +1,4 @@
+parámetros: 1477632
+ep   1 loss 5.499 (15s/ep)
+ep   2 loss 5.006 val válidas 0.0% por K {2: 0.0, 3: 0.0, 4: 0.0} (15s/ep)
+ep   3 loss 4.474 (15s/ep)
