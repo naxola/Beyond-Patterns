@@ -66,3 +66,6 @@ Decisiones de diseño: salida de coordenadas libres discretizadas en 256 niveles
 | 1 | 20.000 | d=128, 3+3 capas, 1,5 M parám. | 40 | **19,2 %** (K=2: 50 %, K=3: 9 %, K=4: 2 %) |
 
 Diagnóstico del intento 1 (300 problemas de val): el 81 % de los vértices generados está a < 0,01 de un punto dado, y ajustarlos al punto más cercano solo sube la validez de 10 % a 13 %. El fallo no es de precisión de coordenadas sino de elegir los vértices correctos (razonamiento combinatorio sobre alineaciones). No se introduce ninguna característica de alineación hecha a mano: daría al modelo la estructura de la solución y debilitaría la hipótesis.
+| 2 | 100.000 | d=192, 4+4 capas, 4,3 M parám. | 20 | **40,0 %** (K=2: 89 %, K=3: 33 %, K=4: 7 %) |
+
+Lectura: 5× datos, 3× parámetros y 3× cómputo duplican la validez (19 % → 40 %) pero no se acerca al umbral de competencia (90 %). K=4 es el cuello de botella. **El umbral de competencia no se cumple; según este prerregistro, el experimento principal no es interpretable todavía.** El control no se ha evaluado (solo se mira cuando val ≥ 90 %). Los conjuntos de prueba no se han usado con ningún modelo.
