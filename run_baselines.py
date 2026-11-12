@@ -39,7 +39,7 @@ for name in ["control", "test_pure", "test_graded"]:
     if w:
         rate("solucionador exacto clase 2 (techo)", d, lambda P, k, i: exact_class2(P, k), True)
     rate("copia del vecino de train", d, lambda P, k, i: copy_nearest(P, k, tr["points"], tr["n"], tr["k"], tr["path"]), w)
-    for M in (100, 10000):
+    for M in (100, 1000):
         rate(f"azar uniforme, M={M}", d, lambda P, k, i: random_uniform(P, k, rng, M), w)
     for M in (100, 10000):
         rate(f"azar sobre rectas de puntos, M={M}", d, lambda P, k, i: random_lines(P, k, rng, M), w)
