@@ -98,13 +98,15 @@ def tours_to_targets(points, tours, n):
 
 
 def tokens_to_vertices(tokens):
-    """(L,) -> (vértices (m,2) en [0,1], terminó)."""
+    """(L,) -> (vértices (m,2) en [0,1], terminó). Un vértice son dos tokens; FIN va en posición x."""
     t = tokens.tolist()
     xs = []
-    for k in range(0, len(t) - 1, 2):
+    for k in range(0, len(t), 2):
         if t[k] == END:
             return _pairs(xs), True
-        xs += [t[k], t[k + 1] if t[k + 1] != END else 0]
+        if k + 1 >= len(t) or t[k + 1] == END:      # vértice incompleto: no hay terminación válida
+            break
+        xs += [t[k], t[k + 1]]
     return _pairs(xs), False
 
 

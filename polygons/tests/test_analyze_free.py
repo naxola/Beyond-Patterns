@@ -19,3 +19,14 @@ def test_tolerance():
     assert classify(SQ, near, True)[0] == "Correcto"
     far = SQ + 0.02
     assert classify(SQ, far, True)[0] == "Inventa vértice"
+
+
+def test_tokens_to_vertices_end_detection():
+    import torch
+    from polygons.model_free import tokens_to_vertices, END
+    v, ended = tokens_to_vertices(torch.tensor([10, 20, 30, 40, END]))
+    assert ended and v.shape == (2, 2)
+    v, ended = tokens_to_vertices(torch.tensor([10, 20, 30, 40]))
+    assert not ended and v.shape == (2, 2)
+    v, ended = tokens_to_vertices(torch.tensor([END]))
+    assert ended and v.shape == (0, 2)
