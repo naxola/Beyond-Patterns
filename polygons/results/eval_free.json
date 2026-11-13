@@ -1,0 +1,427 @@
+{
+ "polygons/results/free_s0.pt": {
+  "4": {
+   "n": 1000,
+   "cats": {
+    "Correcto": 999,
+    "Cruces": 1,
+    "Para antes": 0,
+    "Repite o se pasa": 0,
+    "Inventa v\u00e9rtice": 0,
+    "No termina": 0
+   },
+   "emitidos": {
+    "4": 1000
+   },
+   "por_nivel": {
+    "regular": {
+     "Correcto": 334,
+     "Cruces": 0,
+     "Para antes": 0,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 0,
+     "No termina": 0
+    },
+    "irregular": {
+     "Correcto": 333,
+     "Cruces": 0,
+     "Para antes": 0,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 0,
+     "No termina": 0
+    },
+    "estrecho": {
+     "Correcto": 332,
+     "Cruces": 1,
+     "Para antes": 0,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 0,
+     "No termina": 0
+    }
+   }
+  },
+  "5": {
+   "n": 1000,
+   "cats": {
+    "Correcto": 54,
+    "Cruces": 0,
+    "Para antes": 790,
+    "Repite o se pasa": 148,
+    "Inventa v\u00e9rtice": 8,
+    "No termina": 0
+   },
+   "emitidos": {
+    "4": 793,
+    "5": 54,
+    "7": 152,
+    "6": 1
+   },
+   "por_nivel": {
+    "regular": {
+     "Correcto": 15,
+     "Cruces": 0,
+     "Para antes": 207,
+     "Repite o se pasa": 24,
+     "Inventa v\u00e9rtice": 4,
+     "No termina": 0
+    },
+    "irregular": {
+     "Correcto": 16,
+     "Cruces": 0,
+     "Para antes": 203,
+     "Repite o se pasa": 30,
+     "Inventa v\u00e9rtice": 1,
+     "No termina": 0
+    },
+    "noconvexo": {
+     "Correcto": 17,
+     "Cruces": 0,
+     "Para antes": 191,
+     "Repite o se pasa": 41,
+     "Inventa v\u00e9rtice": 1,
+     "No termina": 0
+    },
+    "estrecho": {
+     "Correcto": 6,
+     "Cruces": 0,
+     "Para antes": 189,
+     "Repite o se pasa": 53,
+     "Inventa v\u00e9rtice": 2,
+     "No termina": 0
+    }
+   }
+  },
+  "6": {
+   "n": 1000,
+   "cats": {
+    "Correcto": 37,
+    "Cruces": 0,
+    "Para antes": 80,
+    "Repite o se pasa": 839,
+    "Inventa v\u00e9rtice": 44,
+    "No termina": 0
+   },
+   "emitidos": {
+    "7": 883,
+    "4": 77,
+    "6": 37,
+    "5": 3
+   },
+   "por_nivel": {
+    "regular": {
+     "Correcto": 11,
+     "Cruces": 0,
+     "Para antes": 10,
+     "Repite o se pasa": 210,
+     "Inventa v\u00e9rtice": 19,
+     "No termina": 0
+    },
+    "irregular": {
+     "Correcto": 10,
+     "Cruces": 0,
+     "Para antes": 20,
+     "Repite o se pasa": 208,
+     "Inventa v\u00e9rtice": 12,
+     "No termina": 0
+    },
+    "noconvexo": {
+     "Correcto": 9,
+     "Cruces": 0,
+     "Para antes": 22,
+     "Repite o se pasa": 211,
+     "Inventa v\u00e9rtice": 8,
+     "No termina": 0
+    },
+    "estrecho": {
+     "Correcto": 7,
+     "Cruces": 0,
+     "Para antes": 28,
+     "Repite o se pasa": 210,
+     "Inventa v\u00e9rtice": 5,
+     "No termina": 0
+    }
+   }
+  },
+  "7": {
+   "n": 1000,
+   "cats": {
+    "Correcto": 996,
+    "Cruces": 0,
+    "Para antes": 0,
+    "Repite o se pasa": 4,
+    "Inventa v\u00e9rtice": 0,
+    "No termina": 0
+   },
+   "emitidos": {
+    "7": 1000
+   },
+   "por_nivel": {
+    "regular": {
+     "Correcto": 334,
+     "Cruces": 0,
+     "Para antes": 0,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 0,
+     "No termina": 0
+    },
+    "irregular": {
+     "Correcto": 333,
+     "Cruces": 0,
+     "Para antes": 0,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 0,
+     "No termina": 0
+    },
+    "estrecho": {
+     "Correcto": 329,
+     "Cruces": 0,
+     "Para antes": 0,
+     "Repite o se pasa": 4,
+     "Inventa v\u00e9rtice": 0,
+     "No termina": 0
+    }
+   }
+  },
+  "8": {
+   "n": 1000,
+   "cats": {
+    "Correcto": 0,
+    "Cruces": 0,
+    "Para antes": 990,
+    "Repite o se pasa": 3,
+    "Inventa v\u00e9rtice": 7,
+    "No termina": 0
+   },
+   "emitidos": {
+    "7": 999,
+    "6": 1
+   },
+   "por_nivel": {
+    "regular": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 247,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 3,
+     "No termina": 0
+    },
+    "irregular": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 248,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 2,
+     "No termina": 0
+    },
+    "noconvexo": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 245,
+     "Repite o se pasa": 3,
+     "Inventa v\u00e9rtice": 2,
+     "No termina": 0
+    },
+    "estrecho": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 250,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 0,
+     "No termina": 0
+    }
+   }
+  },
+  "9": {
+   "n": 1000,
+   "cats": {
+    "Correcto": 0,
+    "Cruces": 0,
+    "Para antes": 990,
+    "Repite o se pasa": 1,
+    "Inventa v\u00e9rtice": 9,
+    "No termina": 0
+   },
+   "emitidos": {
+    "7": 1000
+   },
+   "por_nivel": {
+    "regular": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 247,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 3,
+     "No termina": 0
+    },
+    "irregular": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 249,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 1,
+     "No termina": 0
+    },
+    "noconvexo": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 246,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 4,
+     "No termina": 0
+    },
+    "estrecho": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 248,
+     "Repite o se pasa": 1,
+     "Inventa v\u00e9rtice": 1,
+     "No termina": 0
+    }
+   }
+  },
+  "10": {
+   "n": 1000,
+   "cats": {
+    "Correcto": 0,
+    "Cruces": 0,
+    "Para antes": 973,
+    "Repite o se pasa": 4,
+    "Inventa v\u00e9rtice": 23,
+    "No termina": 0
+   },
+   "emitidos": {
+    "7": 1000
+   },
+   "por_nivel": {
+    "regular": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 243,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 7,
+     "No termina": 0
+    },
+    "irregular": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 241,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 9,
+     "No termina": 0
+    },
+    "noconvexo": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 247,
+     "Repite o se pasa": 1,
+     "Inventa v\u00e9rtice": 2,
+     "No termina": 0
+    },
+    "estrecho": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 242,
+     "Repite o se pasa": 3,
+     "Inventa v\u00e9rtice": 5,
+     "No termina": 0
+    }
+   }
+  },
+  "12": {
+   "n": 1000,
+   "cats": {
+    "Correcto": 0,
+    "Cruces": 0,
+    "Para antes": 961,
+    "Repite o se pasa": 1,
+    "Inventa v\u00e9rtice": 38,
+    "No termina": 0
+   },
+   "emitidos": {
+    "7": 1000
+   },
+   "por_nivel": {
+    "regular": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 241,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 9,
+     "No termina": 0
+    },
+    "irregular": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 238,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 12,
+     "No termina": 0
+    },
+    "noconvexo": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 242,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 8,
+     "No termina": 0
+    },
+    "estrecho": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 240,
+     "Repite o se pasa": 1,
+     "Inventa v\u00e9rtice": 9,
+     "No termina": 0
+    }
+   }
+  },
+  "16": {
+   "n": 1000,
+   "cats": {
+    "Correcto": 0,
+    "Cruces": 0,
+    "Para antes": 930,
+    "Repite o se pasa": 2,
+    "Inventa v\u00e9rtice": 68,
+    "No termina": 0
+   },
+   "emitidos": {
+    "7": 1000
+   },
+   "por_nivel": {
+    "regular": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 234,
+     "Repite o se pasa": 1,
+     "Inventa v\u00e9rtice": 15,
+     "No termina": 0
+    },
+    "irregular": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 233,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 17,
+     "No termina": 0
+    },
+    "noconvexo": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 234,
+     "Repite o se pasa": 0,
+     "Inventa v\u00e9rtice": 16,
+     "No termina": 0
+    },
+    "estrecho": {
+     "Correcto": 0,
+     "Cruces": 0,
+     "Para antes": 229,
+     "Repite o se pasa": 1,
+     "Inventa v\u00e9rtice": 20,
+     "No termina": 0
+    }
+   }
+  }
+ }
+}

@@ -68,3 +68,11 @@ Se informa además cuántos vértices emite según N, y en particular si emite e
 
 **Hipótesis previa (no un criterio de éxito):** con N=10 y 12 es probable que pare en 7 o que repita puntos, porque 4 y 7 son las únicas longitudes que vio. Si en cambio acierta ≥ 90 % en ambos N, el modelo habrá aprendido "para cuando has visitado todos". Cualquiera de los dos resultados se publica.
 Criterio comparable al del modelo de puntero: ≥ 90 % de *Correcto* con N=10 y 12 en niveles convexos, en ≥ 2 de 3 semillas.
+
+### Modelo B: condición de control de variedad (fijada tras ver la semilla 0 del modelo B y antes de entrenarla)
+Semilla 0 del modelo B (4 y 7 puntos): correcto 99,9 % con N=4 y 99,6 % con N=7; con N≥8 emite siempre 7 vértices y para (93–99 % "Para antes"); con N=5 emite 4 (79 %) y con N=6 emite 7 (88 %). Solo emite longitudes 4 o 7.
+
+Esto admite dos lecturas: (a) con solo dos tamaños el modelo no tiene datos para distinguir "para tras 4 o 7" de "para cuando has visitado todos"; (b) aunque haya variedad, el modelo de coordenadas libres no extrapola la longitud de la salida. Para separarlas se entrena **una variante con N ∈ {4, 5, 6, 7}** (20.000 problemas por tamaño, mismos niveles) y se prueba en N = 8, 9, 10, 12, 16, que siguen sin verse.
+- Si emite N vértices con N ≥ 8 y acierta ≥ 90 %: el fallo anterior era falta de variedad.
+- Si sigue emitiendo 7: el fallo no se explica por falta de variedad dentro de 4–7.
+Se evalúa con los problemas ya generados de `test_n5` y `test_n6` (semillas distintas de las de entrenamiento).

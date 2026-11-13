@@ -14,7 +14,7 @@ ap.add_argument("--out", default="polygons/results/free_s0.pt")
 a = ap.parse_args()
 torch.manual_seed(a.seed); rng = np.random.default_rng(a.seed)
 sizes = [int(s) for s in a.train_sizes.split(",")]
-names = {4: "dataset1_n4", 7: "dataset2_n7"}
+names = {4: "dataset1_n4", 5: "dataset_n5", 6: "dataset_n6", 7: "dataset2_n7"}
 M = max(sizes)
 pts, tours, ns = [], [], []
 for s in sizes:
