@@ -31,3 +31,16 @@ Vértices de un polígono regular de N lados, con rotación aleatoria, radio ent
 
 ## Alcance de la afirmación
 Un éxito demuestra generalización al número de puntos (la misma regla aplicada a más puntos). No demuestra una clase de solución nueva.
+
+## Enmienda 1 (antes de entrenar ningún modelo)
+Al ejecutar las referencias, el vecino más cercano acertaba el 97–98 % con N=10 y 12 en los tres niveles iniciales (orden angular 100 %, azar 0 %). Con esos datos, un modelo que solo hubiera aprendido "ir al punto más cercano" habría superado el criterio de éxito. Se añade el nivel **`estrecho`**: elipse convexa con eje menor entre 0,12 y 0,30 del mayor, donde vecinos de lados opuestos están más cerca que los siguientes en el contorno.
+
+| Vecino más cercano, válidos | N=4 | N=7 | N=10 | N=12 | N=16 |
+|---|---|---|---|---|---|
+| `regular` | 100 % | 100 % | 100 % | 100 % | 100 % |
+| `irregular` | 92 % | 96 % | 97 % | 96 % | 99 % |
+| `estrecho` | 24 % | 0 % | 3 % | 12 % | 35 % |
+
+- `estrecho` entra en el entrenamiento (con `regular` e `irregular`) y en todas las pruebas. `noconvexo` sigue solo en prueba.
+- **Criterio de éxito corregido:** ≥ 90 % de válidos con N=10 y N=12 en **cada** nivel convexo, `estrecho` incluido, en ≥ 4 de 5 semillas. Pasar solo `regular`/`irregular` no cuenta, porque lo logra el vecino más cercano.
+- El control (≥ 95 %) se evalúa también por nivel.

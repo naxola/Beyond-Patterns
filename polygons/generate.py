@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 import numpy as np
 
-LEVELS = ("regular", "irregular", "noconvexo")
+LEVELS = ("regular", "irregular", "noconvexo", "estrecho")
 MIN_DIST = 0.04
 
 
@@ -39,8 +39,8 @@ def make_problem(rng, n, level):
         elif level == "noconvexo":
             rad = r * rng.uniform(0.55, 1.0, n)
         v = np.stack([rad * np.cos(ang), rad * np.sin(ang)], 1)
-        if level == "irregular":                      # elipse: sigue siendo convexo
-            v[:, 1] *= rng.uniform(0.6, 1.0)
+        if level in ("irregular", "estrecho"):        # elipse: sigue siendo convexo
+            v[:, 1] *= rng.uniform(0.6, 1.0) if level == "irregular" else rng.uniform(0.12, 0.30)
             t = rng.uniform(0, 2 * np.pi)
             v = v @ np.array([[np.cos(t), -np.sin(t)], [np.sin(t), np.cos(t)]]).T
         lo, hi = v.min(0), v.max(0)

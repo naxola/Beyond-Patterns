@@ -6,7 +6,7 @@ from polygons.metrics import is_valid_polygon, is_convex, same_cycle, is_simple
 def test_reference_tours_are_valid_polygons():
     rng = np.random.default_rng(0)
     for n in (4, 7, 10, 12, 16):
-        for level in ("regular", "irregular", "noconvexo"):
+        for level in ("regular", "irregular", "estrecho", "noconvexo"):
             for _ in range(40):
                 p = make_problem(rng, n, level)
                 assert p.points.min() >= 0 and p.points.max() <= 1
