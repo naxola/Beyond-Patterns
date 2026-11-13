@@ -170,6 +170,70 @@ def curves(eval_json="polygons/results/eval.json"):
     fig.savefig(f"{OUT}/acierto_vs_n.png", dpi=200); plt.close(fig)
 
 
+CAT_COL = {"Correcto": "#2a78d6", "Para antes": "#eb6834", "Repite o se pasa": "#1baf7a",
+           "Cruces": "#eda100", "Inventa vértice": "#e87ba4", "No termina": "#008300"}
+
+
+def free_results(path="polygons/results/eval_free.json", out="modelo_libre.png", title_note=""):
+    """Modelo de coordenadas libres: qué hace según N. Suma los resultados de todas las semillas del archivo."""
+    import json
+    from .analyze_free import CATS
+    res = json.load(open(path))
+    sizes = sorted(int(n) for n in next(iter(res.values())))
+    ns = len(res)
+    tot = {n: {c: sum(r[str(n)]["cats"][c] for r in res.values()) for c in CATS} for n in sizes}
+    cnt = {n: sum(tot[n].values()) for n in sizes}
+    emit = {n: {} for n in sizes}
+    for r in res.values():
+        for n in sizes:
+            for k, v in r[str(n)]["emitidos"].items():
+                emit[n][int(k)] = emit[n].get(int(k), 0) + v
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(13.5, 5.2), gridspec_kw=dict(width_ratios=[1.25, 1]))
+    fig.subplots_adjust(left=0.055, right=0.985, top=0.70, bottom=0.12, wspace=0.16)
+    xs = np.arange(len(sizes))
+    bottom = np.zeros(len(sizes))
+    for c in CATS:
+        v = np.array([tot[n][c] / cnt[n] * 100 for n in sizes])
+        a1.bar(xs, v, bottom=bottom, width=0.72, color=CAT_COL[c], edgecolor=SURFACE, linewidth=1.5, zorder=3)
+        for x, b, h in zip(xs, bottom, v):
+            if h >= 6:
+                a1.text(x, b + h / 2, f"{h:.0f}%", ha="center", va="center", fontsize=8.5, color=INK, zorder=4)
+        bottom += v
+    a1.set_xticks(xs); a1.set_xticklabels([str(n) for n in sizes])
+    for i, n in enumerate(sizes):
+        if n in (4, 7):
+            a1.text(i, 103, "entrenado", ha="center", va="bottom", fontsize=8, color=INK2)
+    a1.set_ylim(0, 110); a1.set_yticks([0, 25, 50, 75, 100])
+    a1.set_xlabel("Número de puntos de entrada", fontsize=9.5, color=INK2); a1.set_ylabel("% de problemas", fontsize=9.5, color=INK2)
+    a1.set_title("Qué resultado produce", fontsize=11, color=INK, loc="left", pad=16)
+    # panel 2: vértices emitidos frente a N (mismo eje ordinal que el panel izquierdo)
+    a2.plot(xs, sizes, color="#a9a8a3", lw=1.5, ls=(0, (4, 3)), zorder=1)
+    a2.text(len(sizes) - 0.6, 15.3, "ideal: tantos vértices\ncomo puntos de entrada", ha="right", va="top", fontsize=8.5, color=INK2)
+    for i, n in enumerate(sizes):
+        tot_e = sum(emit[n].values())
+        for m, v in emit[n].items():
+            f = v / tot_e
+            if f >= 0.01:
+                a2.scatter(i, m, s=40 + 650 * f, color=C1, alpha=0.9, edgecolor=SURFACE, linewidth=1.2, zorder=3)
+                if f >= 0.07:
+                    a2.text(i, m + 0.9 + 0.5 * f, f"{f*100:.0f}%", ha="center", va="bottom", fontsize=8.5, color=INK2, zorder=4)
+    for i, n in enumerate(sizes):
+        if n in (4, 7):
+            a2.axvspan(i - 0.36, i + 0.36, color="#e9e8e4", zorder=0)
+    a2.set_xlim(-0.6, len(sizes) - 0.4); a2.set_ylim(2.5, 17.5)
+    a2.set_xticks(xs); a2.set_xticklabels([str(n) for n in sizes]); a2.set_yticks([4, 7, 10, 12, 16])
+    a2.set_xlabel("Número de puntos de entrada", fontsize=9.5, color=INK2); a2.set_ylabel("Vértices que dibuja", fontsize=9.5, color=INK2)
+    a2.set_title("Cuántos vértices dibuja antes de parar", fontsize=11, color=INK, loc="left", pad=16)
+    for a in (a1, a2):
+        a.tick_params(colors=INK2, labelsize=9, length=0); a.grid(axis="y", color=GRID, lw=0.8); a.set_axisbelow(True)
+        for sp in a.spines.values(): sp.set_visible(False)
+    fig.text(0.012, 0.955, "Modelo de coordenadas libres: qué hace con tamaños que no entrenó" + title_note, fontsize=15, fontweight="bold")
+    fig.text(0.012, 0.912, f"Entrenado con polígonos de 4 y 7 puntos. {ns} semilla{'s' if ns != 1 else ''}; {cnt[sizes[0]] // ns} problemas por tamaño y semilla.", fontsize=9.5, color=INK2)
+    h = [Line2D([], [], marker="s", ls="", color=CAT_COL[c], markersize=9, label=c) for c in CATS]
+    fig.legend(handles=h, loc="upper left", bbox_to_anchor=(0.005, 0.885), ncol=6, frameon=False, fontsize=9.5, labelcolor=INK2, handletextpad=0.3, columnspacing=1.6)
+    fig.savefig(f"{OUT}/{out}", dpi=200); plt.close(fig)
+
+
 def variants(path="polygons/results/variantes.json"):
     """Qué tamaños de entrenamiento hacen falta: solo 4, solo 7 o ambos."""
     import json
@@ -240,6 +304,8 @@ if __name__ == "__main__":
     what = sys.argv[1] if len(sys.argv) > 1 else "datasets"
     if what == "predictions":
         predictions(sys.argv[2])
+    elif what == "free":
+        free_results(*(sys.argv[2:3] or []) , **({"out": sys.argv[3]} if len(sys.argv) > 3 else {}))
     elif what == "variants":
         variants()
     elif what == "curves":
