@@ -76,3 +76,6 @@ Esto admite dos lecturas: (a) con solo dos tamaños el modelo no tiene datos par
 - Si emite N vértices con N ≥ 8 y acierta ≥ 90 %: el fallo anterior era falta de variedad.
 - Si sigue emitiendo 7: el fallo no se explica por falta de variedad dentro de 4–7.
 Se evalúa con los problemas ya generados de `test_n5` y `test_n6` (semillas distintas de las de entrenamiento).
+
+### Resultados del modelo B
+Ver `INFORME.md`. Hipótesis previa cumplida: con N ≥ 8 emite 7 vértices y para (0–0,1 % correcto en 3 semillas). Condición de variedad (1 semilla): 95 % con N=8, 73 % con N=9, 36 % con N=10, 0,6 % con N=12 y 0 % con N=16; la longitud emitida se satura en 9–10 vértices. Ninguna de las dos lecturas preregistradas se cumple del todo. Criterio comparable al del puntero (≥ 90 % con N=10 y 12): **no se cumple** en ninguna variante.

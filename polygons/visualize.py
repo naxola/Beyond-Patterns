@@ -234,6 +234,43 @@ def free_results(path="polygons/results/eval_free.json", out="modelo_libre.png",
     fig.savefig(f"{OUT}/{out}", dpi=200); plt.close(fig)
 
 
+def comparison():
+    """Polígonos correctos frente a N en niveles convexos: puntero, libre (4+7) y libre (4-5-6-7)."""
+    import json
+    sizes = [4, 5, 6, 7, 8, 9, 10, 12, 16]
+    cv = ("regular", "irregular", "estrecho")
+    ev = json.load(open("polygons/results/eval.json"))["modelo"]
+    P = np.array([[np.mean([r[str(n)][lv]["valid"] for lv in cv]) * 100 for n in sizes] for r in ev.values()])
+    def free(path):
+        out = []
+        for r in json.load(open(path)).values():
+            out.append([sum(r[str(n)]["por_nivel"][lv]["Correcto"] for lv in cv) / sum(sum(r[str(n)]["por_nivel"][lv].values()) for lv in cv) * 100 for n in sizes])
+        return np.array(out)
+    F, V = free("polygons/results/eval_free.json"), free("polygons/results/eval_free_var.json")
+    series = [("Puntero · entrenado con 4 y 7", P, C1), ("Coordenadas libres · entrenado con 4 y 7", F, "#eb6834"),
+              ("Coordenadas libres · entrenado con 4, 5, 6 y 7", V, "#1baf7a")]
+    xs = np.arange(len(sizes))
+    fig, ax = plt.subplots(figsize=(10.5, 5.6))
+    fig.subplots_adjust(left=0.07, right=0.97, top=0.76, bottom=0.12)
+    for i, n in enumerate(sizes):
+        if n in (4, 7):
+            ax.axvspan(i - 0.36, i + 0.36, color="#e9e8e4", zorder=0)
+    for label, M, col in series:
+        y = M.mean(0)
+        if len(M) > 1:
+            ax.fill_between(xs, M.min(0), M.max(0), color=col, alpha=0.15, lw=0)
+        ax.plot(xs, y, color=col, lw=2.2, marker="o", ms=5, mec=SURFACE, mew=1.2, zorder=3)
+    ax.set_ylim(-3, 106); ax.set_xticks(xs); ax.set_xticklabels([str(n) for n in sizes])
+    ax.set_xlabel("Número de puntos de entrada", fontsize=10, color=INK2); ax.set_ylabel("Polígonos correctos (%)", fontsize=10, color=INK2)
+    ax.tick_params(colors=INK2, labelsize=9.5, length=0); ax.grid(axis="y", color=GRID, lw=0.8); ax.set_axisbelow(True)
+    for sp in ax.spines.values(): sp.set_visible(False)
+    fig.text(0.012, 0.955, "Tres modelos, mismo problema: ¿cuántos puntos pueden unir?", fontsize=15, fontweight="bold")
+    fig.text(0.012, 0.912, "Niveles convexos. Franjas grises: tamaños 4 y 7 (entrenados por todos); la variante verde entrenó además con 5 y 6. Banda = rango entre semillas.", fontsize=9.2, color=INK2)
+    h = [Line2D([], [], color=c, lw=2.2, marker="o", ms=5, label=f"{l} ({len(M)} sem.)") for l, M, c in series]
+    fig.legend(handles=h, loc="upper left", bbox_to_anchor=(0.005, 0.885), ncol=1, frameon=False, fontsize=9.5, labelcolor=INK2)
+    fig.savefig(f"{OUT}/comparacion_modelos.png", dpi=200); plt.close(fig)
+
+
 def variants(path="polygons/results/variantes.json"):
     """Qué tamaños de entrenamiento hacen falta: solo 4, solo 7 o ambos."""
     import json
@@ -304,6 +341,8 @@ if __name__ == "__main__":
     what = sys.argv[1] if len(sys.argv) > 1 else "datasets"
     if what == "predictions":
         predictions(sys.argv[2])
+    elif what == "comparison":
+        comparison()
     elif what == "free":
         free_results(*(sys.argv[2:3] or []) , **({"out": sys.argv[3]} if len(sys.argv) > 3 else {}))
     elif what == "variants":
