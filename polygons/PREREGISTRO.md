@@ -47,3 +47,24 @@ Al ejecutar las referencias, el vecino más cercano acertaba el 97–98 % con N=
 
 ## Resultados (fase 3-4)
 Ver `INFORME.md`. Criterio de éxito cumplido en 5/5 semillas (mínimo 98,1 % con N=10 y 12 en niveles convexos). El criterio y los datos no se modificaron tras ver resultados de modelo; la única enmienda (nivel `estrecho`) se hizo antes de entrenar y se registró arriba.
+
+## Modelo B: coordenadas libres (fijado antes de entrenarlo)
+**Pregunta:** si el modelo puede escribir cualquier coordenada y decidir cuándo parar, ¿qué hace con N=10 o 12 puntos? ¿Para en 7, cierra antes, omite puntos, repite, inventa vértices?
+
+- **Salida:** vértices como pares (x, y) discretizados en 256 niveles por eje, más un símbolo FIN. Sin máscara de puntos ya visitados ni número de vértices dado. Es el mismo problema, mismos datos y mismo entrenamiento (N=4 y N=7) que el modelo de puntero.
+- **Posición de salida:** codificación sinusoidal del índice de vértice (definida para cualquier índice, también los no entrenados) más un embedding de "x o y". Se elige así para no fijar de antemano un máximo de 7 vértices por tener parámetros sin entrenar.
+- **Decodificación:** voraz, hasta FIN o 24 vértices.
+- **Emparejado de vértices:** un vértice de salida corresponde a un punto de entrada si dista ≤ 0,012 (≈ 3 niveles de cuantización; los puntos distan ≥ 0,04, así que no hay ambigüedad).
+
+**Categorías de resultado (excluyentes, en este orden de prioridad):**
+1. *Vértice inventado:* algún vértice no corresponde a ningún punto.
+2. *No termina:* llega a 24 vértices sin emitir FIN.
+3. *Para antes:* emite FIN con menos vértices que N, sin repetir puntos (omite puntos).
+4. *Repite o se pasa:* repite algún punto o emite más de N vértices.
+5. *Cruces:* visita cada punto una vez pero el polígono se cruza.
+6. *Correcto:* polígono válido que pasa por todos los puntos una vez.
+
+Se informa además cuántos vértices emite según N, y en particular si emite exactamente 4 o 7 cuando N no lo es.
+
+**Hipótesis previa (no un criterio de éxito):** con N=10 y 12 es probable que pare en 7 o que repita puntos, porque 4 y 7 son las únicas longitudes que vio. Si en cambio acierta ≥ 90 % en ambos N, el modelo habrá aprendido "para cuando has visitado todos". Cualquiera de los dos resultados se publica.
+Criterio comparable al del modelo de puntero: ≥ 90 % de *Correcto* con N=10 y 12 en niveles convexos, en ≥ 2 de 3 semillas.
