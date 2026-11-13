@@ -10,6 +10,7 @@ SURFACE, INK, INK2, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e4e3df"
 C1, C2 = "#2a78d6", "#eb6834"          # Dataset 1 (azul), Dataset 2 (naranja)
 OUT = "polygons/results"
 LEVEL_NAMES = {0: "casi regular", 1: "irregular (convexo)", 2: "no convexo", 3: "estrecho (convexo)"}
+SHORT = {0: "casi regular", 1: "irregular", 2: "no convexo", 3: "estrecho"}
 OK_C, BAD_C = "#0ca30c", "#d03b3b"      # estado: válido / inválido (siempre con ✓ / ✗)
 plt.rcParams.update({"font.family": "DejaVu Sans", "text.color": INK, "savefig.facecolor": SURFACE,
                      "figure.facecolor": SURFACE, "axes.facecolor": SURFACE})
@@ -195,11 +196,11 @@ def failures(model_path, cols=6):
     for ax, (n, p, t, ref, lv) in zip(axes.ravel(), found):
         ax.axis("on")
         panel(ax, p)
-        R = p[list(ref) + [ref[0]]]; ax.plot(R[:, 0], R[:, 1], color="#a9a8a3", lw=1.5, ls=(0, (3, 3)), zorder=1)
-        T = p[list(t) + [t[0]]]; ax.plot(T[:, 0], T[:, 1], color=BAD_C, lw=2, zorder=2)
-        ax.set_title(f"{n} puntos · {LEVEL_NAMES[lv].split(' ')[0]}", fontsize=8.5, color=INK2, loc="left")
+        R = p[list(ref) + [ref[0]]]; ax.plot(R[:, 0], R[:, 1], color="#bdbcb6", lw=5, solid_capstyle="round", zorder=1)
+        T = p[list(t) + [t[0]]]; ax.plot(T[:, 0], T[:, 1], color=BAD_C, lw=1.6, zorder=2)
+        ax.set_title(f"{n} puntos · {SHORT[lv]}", fontsize=8.5, color=INK2, loc="left")
     fig.text(0.012, 0.955, "Galería de fallos", fontsize=15, fontweight="bold")
-    fig.text(0.012, 0.915, "Rojo: recorrido del modelo (no válido). Gris discontinuo: polígono correcto.", fontsize=9.5, color=INK2)
+    fig.text(0.012, 0.915, "Rojo: recorrido del modelo (no válido). Gris ancho: polígono correcto. El 80 % de los fallos (269 en 5 semillas) se corrige intercambiando dos vecinos; con 10 y 12 puntos, todos. Aquí, 16 puntos.", fontsize=9.5, color=INK2)
     fig.savefig(f"{OUT}/fallos.png", dpi=200); plt.close(fig)
 
 

@@ -182,6 +182,738 @@
      "exact": 0.992
     }
    }
+  },
+  "polygons/results/model_s1.pt": {
+   "4": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "5": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "6": {
+    "valid": 1.0,
+    "exact": 0.9993333333333333,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9973333333333333
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "7": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "8": {
+    "valid": 1.0,
+    "exact": 0.9953333333333333,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9813333333333333
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "9": {
+    "valid": 1.0,
+    "exact": 0.9913333333333333,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9653333333333334
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "10": {
+    "valid": 1.0,
+    "exact": 0.9753333333333334,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9013333333333333
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "12": {
+    "valid": 0.998,
+    "exact": 0.9506666666666667,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.8106666666666666
+    },
+    "estrecho": {
+     "valid": 0.992,
+     "exact": 0.992
+    }
+   },
+   "16": {
+    "valid": 0.996,
+    "exact": 0.858,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 0.992,
+     "exact": 0.44
+    },
+    "estrecho": {
+     "valid": 0.992,
+     "exact": 0.992
+    }
+   }
+  },
+  "polygons/results/model_s2.pt": {
+   "4": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "5": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "6": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "7": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "8": {
+    "valid": 1.0,
+    "exact": 0.9966666666666667,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9866666666666667
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "9": {
+    "valid": 1.0,
+    "exact": 0.9926666666666667,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9706666666666667
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "10": {
+    "valid": 1.0,
+    "exact": 0.9866666666666667,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9466666666666667
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "12": {
+    "valid": 0.9993333333333333,
+    "exact": 0.962,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.8506666666666667
+    },
+    "estrecho": {
+     "valid": 0.9973333333333333,
+     "exact": 0.9973333333333333
+    }
+   },
+   "16": {
+    "valid": 0.99,
+    "exact": 0.8826666666666667,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 0.9893333333333333,
+     "exact": 0.9893333333333333
+    },
+    "noconvexo": {
+     "valid": 0.9866666666666667,
+     "exact": 0.5573333333333333
+    },
+    "estrecho": {
+     "valid": 0.984,
+     "exact": 0.984
+    }
+   }
+  },
+  "polygons/results/model_s3.pt": {
+   "4": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "5": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "6": {
+    "valid": 0.9993333333333333,
+    "exact": 0.9986666666666667,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9973333333333333
+    },
+    "estrecho": {
+     "valid": 0.9973333333333333,
+     "exact": 0.9973333333333333
+    }
+   },
+   "7": {
+    "valid": 0.9993333333333333,
+    "exact": 0.9993333333333333,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 0.998,
+     "exact": 0.998
+    }
+   },
+   "8": {
+    "valid": 1.0,
+    "exact": 0.9973333333333333,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9893333333333333
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "9": {
+    "valid": 1.0,
+    "exact": 0.9953333333333333,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9813333333333333
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "10": {
+    "valid": 0.9993333333333333,
+    "exact": 0.986,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9466666666666667
+    },
+    "estrecho": {
+     "valid": 0.9973333333333333,
+     "exact": 0.9973333333333333
+    }
+   },
+   "12": {
+    "valid": 1.0,
+    "exact": 0.9633333333333334,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.8533333333333334
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "16": {
+    "valid": 0.9893333333333333,
+    "exact": 0.89,
+    "n": 1500,
+    "regular": {
+     "valid": 0.9946666666666667,
+     "exact": 0.9946666666666667
+    },
+    "irregular": {
+     "valid": 0.9946666666666667,
+     "exact": 0.9946666666666667
+    },
+    "noconvexo": {
+     "valid": 0.9893333333333333,
+     "exact": 0.592
+    },
+    "estrecho": {
+     "valid": 0.9786666666666667,
+     "exact": 0.9786666666666667
+    }
+   }
+  },
+  "polygons/results/model_s4.pt": {
+   "4": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "5": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "6": {
+    "valid": 1.0,
+    "exact": 0.9986666666666667,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9946666666666667
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "7": {
+    "valid": 1.0,
+    "exact": 1.0,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "8": {
+    "valid": 1.0,
+    "exact": 0.9946666666666667,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9786666666666667
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "9": {
+    "valid": 1.0,
+    "exact": 0.9906666666666667,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 1.0,
+     "exact": 0.9626666666666667
+    },
+    "estrecho": {
+     "valid": 1.0,
+     "exact": 1.0
+    }
+   },
+   "10": {
+    "valid": 0.998,
+    "exact": 0.972,
+    "n": 1500,
+    "regular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "irregular": {
+     "valid": 1.0,
+     "exact": 1.0
+    },
+    "noconvexo": {
+     "valid": 0.9973333333333333,
+     "exact": 0.8933333333333333
+    },
+    "estrecho": {
+     "valid": 0.9946666666666667,
+     "exact": 0.9946666666666667
+    }
+   },
+   "12": {
+    "valid": 0.992,
+    "exact": 0.94,
+    "n": 1500,
+    "regular": {
+     "valid": 0.992,
+     "exact": 0.992
+    },
+    "irregular": {
+     "valid": 0.9973333333333333,
+     "exact": 0.9973333333333333
+    },
+    "noconvexo": {
+     "valid": 0.9973333333333333,
+     "exact": 0.7893333333333333
+    },
+    "estrecho": {
+     "valid": 0.9813333333333333,
+     "exact": 0.9813333333333333
+    }
+   },
+   "16": {
+    "valid": 0.9533333333333334,
+    "exact": 0.808,
+    "n": 1500,
+    "regular": {
+     "valid": 0.952,
+     "exact": 0.952
+    },
+    "irregular": {
+     "valid": 0.9546666666666667,
+     "exact": 0.9546666666666667
+    },
+    "noconvexo": {
+     "valid": 0.9733333333333334,
+     "exact": 0.392
+    },
+    "estrecho": {
+     "valid": 0.9333333333333333,
+     "exact": 0.9333333333333333
+    }
+   }
   }
  },
  "baselines": {
