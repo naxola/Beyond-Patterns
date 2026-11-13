@@ -170,6 +170,36 @@ def curves(eval_json="polygons/results/eval.json"):
     fig.savefig(f"{OUT}/acierto_vs_n.png", dpi=200); plt.close(fig)
 
 
+def variants(path="polygons/results/variantes.json"):
+    """Qué tamaños de entrenamiento hacen falta: solo 4, solo 7 o ambos."""
+    import json
+    res = json.load(open(path))
+    sizes = sorted(int(n) for n in next(iter(res.values())))
+    series = [("solo N=4", "#eb6834", "Entrenado solo con 4 puntos"), ("solo N=7", "#1baf7a", "Entrenado solo con 7 puntos"),
+              ("N=4 y N=7 (semilla 0)", C1, "Entrenado con 4 y 7 puntos")]
+    names = [("regular", "Casi regular"), ("irregular", "Irregular (convexo)"), ("estrecho", "Estrecho (convexo)")]
+    fig, axes = plt.subplots(1, 3, figsize=(11.5, 4.4), sharey=True)
+    fig.subplots_adjust(left=0.065, right=0.985, top=0.70, bottom=0.14, wspace=0.08)
+    for ax, (lv, title) in zip(axes, names):
+        for n in (4, 7):
+            ax.axvspan(n - 0.3, n + 0.3, color="#e9e8e4", zorder=0)
+        for key, col, _ in series:
+            y = [res[key][str(n)][lv]["valid"] * 100 for n in sizes]
+            ax.plot(sizes, y, color=col, lw=2, marker="o", ms=4.5, mec=SURFACE, mew=1.2, zorder=3)
+        ax.set_ylim(-3, 104); ax.set_xticks(sizes)
+        ax.set_title(title, fontsize=10.5, color=INK, loc="left")
+        ax.tick_params(colors=INK2, labelsize=8.5, length=0)
+        ax.grid(axis="y", color=GRID, lw=0.8); ax.set_axisbelow(True)
+        for sp in ax.spines.values(): sp.set_visible(False)
+        ax.set_xlabel("Número de puntos", fontsize=9, color=INK2)
+    axes[0].set_ylabel("Polígonos válidos (%)", fontsize=9.5, color=INK2)
+    fig.text(0.012, 0.955, "¿Hace falta entrenar con dos tamaños?", fontsize=15, fontweight="bold")
+    fig.text(0.012, 0.905, "Una sola semilla por variante. Franjas grises = tamaños de entrenamiento de las variantes (4 y 7).", fontsize=9.5, color=INK2)
+    h = [Line2D([], [], color=c, lw=2, marker="o", ms=5, label=l) for _, c, l in series]
+    fig.legend(handles=h, loc="upper left", bbox_to_anchor=(0.005, 0.865), ncol=3, frameon=False, fontsize=9.5, labelcolor=INK2)
+    fig.savefig(f"{OUT}/variantes.png", dpi=200); plt.close(fig)
+
+
 def failures(model_path, cols=6):
     """Los fallos del modelo (cualquier N de prueba): predicción en rojo, referencia en gris."""
     from .metrics import is_valid_polygon
@@ -210,6 +240,8 @@ if __name__ == "__main__":
     what = sys.argv[1] if len(sys.argv) > 1 else "datasets"
     if what == "predictions":
         predictions(sys.argv[2])
+    elif what == "variants":
+        variants()
     elif what == "curves":
         curves()
     elif what == "failures":

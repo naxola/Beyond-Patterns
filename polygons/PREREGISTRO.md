@@ -44,3 +44,6 @@ Al ejecutar las referencias, el vecino más cercano acertaba el 97–98 % con N=
 - `estrecho` entra en el entrenamiento (con `regular` e `irregular`) y en todas las pruebas. `noconvexo` sigue solo en prueba.
 - **Criterio de éxito corregido:** ≥ 90 % de válidos con N=10 y N=12 en **cada** nivel convexo, `estrecho` incluido, en ≥ 4 de 5 semillas. Pasar solo `regular`/`irregular` no cuenta, porque lo logra el vecino más cercano.
 - El control (≥ 95 %) se evalúa también por nivel.
+
+## Resultados (fase 3-4)
+Ver `INFORME.md`. Criterio de éxito cumplido en 5/5 semillas (mínimo 98,1 % con N=10 y 12 en niveles convexos). El criterio y los datos no se modificaron tras ver resultados de modelo; la única enmienda (nivel `estrecho`) se hizo antes de entrenar y se registró arriba.
