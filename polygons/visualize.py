@@ -9,7 +9,8 @@ from matplotlib.lines import Line2D
 SURFACE, INK, INK2, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e4e3df"
 C1, C2 = "#2a78d6", "#eb6834"          # Dataset 1 (azul), Dataset 2 (naranja)
 OUT = "polygons/results"
-LEVEL_NAMES = {0: "casi regular", 1: "irregular (convexo)", 2: "no convexo"}
+LEVEL_NAMES = {0: "casi regular", 1: "irregular (convexo)", 2: "no convexo", 3: "estrecho (convexo)"}
+OK_C, BAD_C = "#0ca30c", "#d03b3b"      # estado: válido / inválido (siempre con ✓ / ✗)
 plt.rcParams.update({"font.family": "DejaVu Sans", "text.color": INK, "savefig.facecolor": SURFACE,
                      "figure.facecolor": SURFACE, "axes.facecolor": SURFACE})
 
@@ -83,10 +84,135 @@ def example():
     plt.close(fig)
 
 
+def _load_model(path):
+    import torch
+    from .model_pointer import PointerModel
+    m = PointerModel(); m.load_state_dict(torch.load(path)); m.eval()
+    return m
+
+
+def _predict(model, data, idx):
+    import torch
+    return model.predict(torch.as_tensor(data["points"][idx])).numpy()
+
+
+def predictions(model_path, sizes=(10, 12), per_level=2, levels=(0, 1, 3, 2)):
+    """Predicciones con tamaños nunca vistos. Verde ✓ = polígono válido, rojo ✗ = no válido."""
+    from .metrics import is_valid_polygon
+    from .evaluate import load
+    model = _load_model(model_path)
+    cols = per_level * len(levels)
+    fig, axes = plt.subplots(len(sizes), cols, figsize=(cols * 1.75 + 1.0, len(sizes) * 1.95 + 1.55))
+    fig.subplots_adjust(left=0.08, right=0.99, top=0.80, bottom=0.02, wspace=0.07, hspace=0.07)
+    for r, n in enumerate(sizes):
+        d = load(f"test_n{n}")
+        for li, lv in enumerate(levels):
+            idx = np.nonzero(d["level"] == lv)[0][:per_level]
+            tours = _predict(model, d, idx)
+            for k, (i, t) in enumerate(zip(idx, tours)):
+                ax = axes[r, li * per_level + k]
+                ok = is_valid_polygon(d["points"][i], t)
+                panel(ax, d["points"][i], t, OK_C if ok else BAD_C)
+                ax.text(0.04, 0.95, "✓" if ok else "✗", transform=ax.transAxes, fontsize=13, fontweight="bold",
+                        color=OK_C if ok else BAD_C, va="top")
+        axes[r, 0].set_ylabel(f"{n} puntos", fontsize=11, fontweight="bold", color=INK, rotation=0, ha="right", va="center", labelpad=8)
+    for li, lv in enumerate(levels):
+        a, b = axes[0, li * per_level].get_position(), axes[0, li * per_level + per_level - 1].get_position()
+        fig.text((a.x0 + b.x1) / 2, a.y1 + 0.012, LEVEL_NAMES[lv], ha="center", fontsize=10, color=INK2)
+    fig.text(0.012, 0.955, "Predicciones con más puntos de los entrenados", fontsize=15, fontweight="bold")
+    fig.text(0.012, 0.922, "Entrenado solo con 4 y 7 puntos. Aquí recibe 10 y 12 y debe unirlos en un polígono sin cruces.", fontsize=9.5, color=INK2)
+    h = [Line2D([], [], color=OK_C, lw=2, label="✓ Polígono válido (todos los puntos, sin cruces)"),
+         Line2D([], [], color=BAD_C, lw=2, label="✗ No válido")]
+    fig.legend(handles=h, loc="upper left", bbox_to_anchor=(0.005, 0.90), ncol=2, frameon=False, fontsize=9, labelcolor=INK2)
+    fig.savefig(f"{OUT}/predicciones_10_12.png", dpi=200); plt.close(fig)
+
+
+def curves(eval_json="polygons/results/eval.json"):
+    """Acierto (polígonos válidos) frente al número de puntos, un panel por nivel."""
+    import json
+    res = json.load(open(eval_json))
+    sizes = sorted(int(n) for n in next(iter(res["modelo"].values())))
+    names = ["regular", "irregular", "estrecho", "noconvexo"]
+    titles = {"regular": "Casi regular", "irregular": "Irregular (convexo)", "estrecho": "Estrecho (convexo)", "noconvexo": "No convexo (solo prueba)"}
+    series = [("Modelo", C1, "modelo"), ("Vecino más cercano", C2, "vecino más cercano"), ("Orden angular", "#1baf7a", "orden angular")]
+    fig, axes = plt.subplots(1, 4, figsize=(15, 4.4), sharey=True)
+    fig.subplots_adjust(left=0.05, right=0.985, top=0.70, bottom=0.14, wspace=0.08)
+    for ax, lv in zip(axes, names):
+        for n in (4, 7):
+            ax.axvspan(n - 0.3, n + 0.3, color="#e9e8e4", zorder=0)
+        for label, col, key in series:
+            if key == "modelo":
+                M = np.array([[res["modelo"][p][str(n)].get(lv, {"valid": np.nan})["valid"] for n in sizes] for p in res["modelo"]]) * 100
+                y, lo, hi = np.nanmean(M, 0), np.nanmin(M, 0), np.nanmax(M, 0)
+                ax.fill_between(sizes, lo, hi, color=col, alpha=0.18, lw=0)
+            else:
+                y = np.array([res["baselines"][key][str(n)].get(lv, {"valid": np.nan})["valid"] for n in sizes]) * 100
+            if key == "orden angular":      # techo: trazo ancho y claro por debajo, para que se vea el modelo encima
+                ax.plot(sizes, y, color=col, lw=7, alpha=0.35, solid_capstyle="round", zorder=2, label=label)
+            else:
+                ax.plot(sizes, y, color=col, lw=2, marker="o", ms=4.5, mec=SURFACE, mew=1.2, zorder=4 if key == "modelo" else 3, label=label)
+        ax.set_ylim(-3, 104); ax.set_xticks(sizes)
+        ax.set_title(titles[lv], fontsize=10.5, color=INK, loc="left")
+        ax.tick_params(colors=INK2, labelsize=8.5, length=0)
+        ax.grid(axis="y", color=GRID, lw=0.8); ax.set_axisbelow(True)
+        for sp in ax.spines.values(): sp.set_visible(False)
+        ax.set_xlabel("Número de puntos", fontsize=9, color=INK2)
+    axes[0].set_ylabel("Polígonos válidos (%)", fontsize=9.5, color=INK2)
+    fig.text(0.012, 0.955, "Acierto frente al número de puntos", fontsize=15, fontweight="bold")
+    fig.text(0.012, 0.905, "Franjas grises = tamaños de entrenamiento (4 y 7). El resto son tamaños nunca vistos. La banda del modelo es el rango entre semillas.",
+             fontsize=9.5, color=INK2)
+    ns = len(res["modelo"])
+    h = [Line2D([], [], color=C1, lw=2, marker="o", ms=5, label=f"Modelo ({ns} semilla{'s' if ns != 1 else ''})"),
+         Line2D([], [], color=C2, lw=2, marker="o", ms=5, label="Vecino más cercano (atajo)"),
+         Line2D([], [], color="#1baf7a", lw=7, alpha=0.35, label="Orden angular (techo, 100 %)")]
+    fig.legend(handles=h, loc="upper left", bbox_to_anchor=(0.005, 0.865), ncol=3, frameon=False, fontsize=9.5, labelcolor=INK2)
+    fig.savefig(f"{OUT}/acierto_vs_n.png", dpi=200); plt.close(fig)
+
+
+def failures(model_path, cols=6):
+    """Los fallos del modelo (cualquier N de prueba): predicción en rojo, referencia en gris."""
+    from .metrics import is_valid_polygon
+    from .evaluate import load
+    model = _load_model(model_path)
+    found = []
+    for n in (16, 12, 10, 9, 8):
+        d = load(f"test_n{n}")
+        for s in range(0, 3000, 500):
+            idx = np.arange(s, s + 500)
+            tours = _predict(model, d, idx)
+            for i, t in zip(idx, tours):
+                if not is_valid_polygon(d["points"][i], t):
+                    found.append((n, d["points"][i], t, d["tour"][i], int(d["level"][i])))
+        if len(found) >= cols * 2:
+            break
+    found = found[: cols * 2]
+    if not found:
+        print("sin fallos que mostrar"); return
+    rows = int(np.ceil(len(found) / cols))
+    fig, axes = plt.subplots(rows, cols, figsize=(cols * 1.9 + 0.5, rows * 2.2 + 1.3), squeeze=False)
+    fig.subplots_adjust(left=0.02, right=0.99, top=0.80, bottom=0.02, wspace=0.07, hspace=0.18)
+    for ax in axes.ravel(): ax.axis("off")
+    for ax, (n, p, t, ref, lv) in zip(axes.ravel(), found):
+        ax.axis("on")
+        panel(ax, p)
+        R = p[list(ref) + [ref[0]]]; ax.plot(R[:, 0], R[:, 1], color="#a9a8a3", lw=1.5, ls=(0, (3, 3)), zorder=1)
+        T = p[list(t) + [t[0]]]; ax.plot(T[:, 0], T[:, 1], color=BAD_C, lw=2, zorder=2)
+        ax.set_title(f"{n} puntos · {LEVEL_NAMES[lv].split(' ')[0]}", fontsize=8.5, color=INK2, loc="left")
+    fig.text(0.012, 0.955, "Galería de fallos", fontsize=15, fontweight="bold")
+    fig.text(0.012, 0.915, "Rojo: recorrido del modelo (no válido). Gris discontinuo: polígono correcto.", fontsize=9.5, color=INK2)
+    fig.savefig(f"{OUT}/fallos.png", dpi=200); plt.close(fig)
+
+
 if __name__ == "__main__":
     import os
     os.makedirs(OUT, exist_ok=True)
     what = sys.argv[1] if len(sys.argv) > 1 else "datasets"
-    if what == "datasets":
+    if what == "predictions":
+        predictions(sys.argv[2])
+    elif what == "curves":
+        curves()
+    elif what == "failures":
+        failures(sys.argv[2])
+    elif what == "datasets":
         datasets(); example()
         print("ok:", f"{OUT}/datasets.png", f"{OUT}/ejemplo_entrada_salida.png")
